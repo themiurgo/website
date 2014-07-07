@@ -1,0 +1,4 @@
+@font-face { font-family: Lobster; src: url('Lobster.otf'); }
+
+h1, h2, h3, h4 { font-family: 'Lobster', cursive; font-weight: 400; text-shadow: 4px 4px 4px #aaa; margin: 5px 5px 30px 30px; color: #191261; }
+article { font-family: 'EB Garamond', serif; }

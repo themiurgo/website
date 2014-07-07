@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/3.8.1/build/cssreset/cssreset-min.css">
+   <script type="text/javascript" src="http://mbostock.github.com/d3/d3.v2.js"></script>
+   
+     <style type="text/css">
+    svg {
+    }
+
+    #countries path {
+      fill: #cccccc;
+      fill: #6699ff;
+      fill: #E0EBFF
+      fill: #001F5C
+      stroke: #889fd5;
+    }
+
+    #arcs path {
+      fill: none;
+      /*stroke: #CCCCFF;*/
+      stroke-opacity: 0.4;
+    }
+
+    </style>
+  </head>
+  </head>
+  <body>
+    <div id="chart" style="background-color: #000"></div>
+    <script type="text/javascript">
+
+    var w = 960,
+        h = 500;
+    w = 1152;
+    h = 600;
+    var opacity = .7;
+
+    var useGreatCircles = true;
+
+    d3.loadData = function() {
+        var loadedCallback = null;
+        var toload = {};
+        var data = {};
+        var loaded = function(name, d) {
+          delete toload[name];
+          data[name] = d;
+          return notifyIfAll();
+        };
+        var notifyIfAll = function() {
+          if ((loadedCallback != null) && d3.keys(toload).length === 0) {
+            loadedCallback(data);
+          }
+        };
+        var loader = {
+          json: function(name, url) {
+            toload[name] = url;
+            d3.json(url, function(d) {
+              return loaded(name, d);
+            });
+            return loader;
+          },
+          csv: function(name, url) {
+            toload[name] = url;
+            d3.csv(url, function(d) {
+              return loaded(name, d);
+            });
+            return loader;
+          },
+          tsv: function(name, url) {
+            toload[name] = url;
+            d3.tsv(url, function(d) {
+              return loaded(name, d);
+            });
+            return loader;
+          },
+          onload: function(callback) {
+            loadedCallback = callback;
+            notifyIfAll();
+          }
+        };
+        return loader;
+      };
+
+
+
+    var projection = d3.geo.mercator()
+        .translate([560, 360])
+        .scale(1152);
+   
+/*
+
+ var projection = d3.geo.albers()
+        .origin([-500, 300])
+        .scale(100);  
+  var projection = d3.geo.azimuthal()
+        .origin([80, 400])
+        .scale(200);
+
+*/
+
+    var path = d3.geo.path()
+        .projection(projection);
+
+    var arc = d3.geo.greatArc().precision(3) //3);
+
+    var svg = d3.select("body").append("svg")
+        .attr("width", w)
+        .attr("height", h)
+        .on("click", click);
+
+    var background = svg.append("g").attr("id", "background");
+    var countries = svg.append("g").attr("id", "countries");
+    var centroids = svg.append("g").attr("id", "centroids");
+    var arcs = svg.append("g").attr("id", "arcs");
+
+    countries.append("rect")
+      .attr("x", 0)
+      .attr("y", 0)
+      .attr("width", w)
+      .attr("height", h)
+      .style("fill", "#133278");
+
+    svg.append("text")
+      .attr("id", "loading")
+      .attr("x", 5)
+      .attr("y", 17)
+      .attr("font-size", "9pt")
+      .attr("font-family", "arial")
+      .text("Loading...");
+
+    d3.loadData()
+      .json('countries', 'world-countries.json')
+      .csv('retweets', 'retweets_gt2.csv.backup')
+      .onload(function(data) {
+
+        d3.select("#loading").attr("visibility", "hidden");
+
+        var nodeDataByCode = {}, links = [];
+        var maxMagnitude =
+          d3.max(data.retweets, function(d) { return parseFloat(d.nretweets)});
+
+        var arcWidth = d3.scale.log().domain([1, maxMagnitude]).range([1, 10]);
+        var minColor = '#dcde1c';
+        var maxColor = '#dd1c21';
+        //var arcColor = d3.scale.log().domain([1, maxMagnitude]).range([minColor, maxColor]);
+        var arcOpacity = d3.scale.log().domain([1, maxMagnitude]).range([0.1, 0.4]);
+
+        countries.selectAll("path")
+          .data(data.countries.features)
+        .enter().append("path")
+          .attr("d", path);
+
+        function nodeCoords(node) { 
+          var srclon = parseFloat(node.srclng), srclat = parseFloat(node.srclat);
+          var dstlon = parseFloat(node.dstlng), dstlat = parseFloat(node.dstlat);
+          if (isNaN(srclon) || isNaN(srclat)) return null;
+          if (isNaN(dstlon) || isNaN(dstlat)) return null;
+          return [srclon, srclat, dstlon, dstlat];
+        }
+
+        data.retweets.forEach(function(retweet) {
+          var o = retweet;
+          var coords = nodeCoords(retweet)
+          //if (coords) {
+          var co = [coords[0], coords[1]]
+          var po = projection(co);
+          var d = retweet;
+          var cd = [coords[2], coords[3]]
+          var pd = projection(cd);
+          var nretweets = parseFloat(retweet.nretweets);
+          //console.log(retweet);
+          //console.log(o);
+          //console.log(co);
+          //console.log(po);
+          //console.log(d);
+          //console.log(cd);
+          //console.log(pd);
+            if (co  &&  cd) {
+              links.push({
+                source: co, target: cd,
+                nretweets: nretweets,
+                origin:o, dest:d,
+                originp: po, destp:pd 
+              });
+            }
+          //}
+        });
+
+        function splitPath(path) {
+          var avgd = 0, i, d;
+          var c, pc, dx, dy;
+          var points = path.split("L");
+          if (points.length < 2) return path;
+          var newpath = [ points[0] ];
+          var coords = points.map(function(d, i) {
+            return d.substr(i > 0 ? 0 : 1).split(","); // remove M and split
+          });
+
+          // calc avg dist between points
+          for (i = 1; i < coords.length; i++) {
+            pc = coords[i-1]; c = coords[i];
+            dx = c[0] - pc[0]; dy = c[1] - pc[1];
+            d = Math.sqrt(dx*dx + dy*dy);
+            c.push(d);  // push dist as last elem of c
+            avgd += d;
+          }
+          avgd /= coords.length - 1;
+
+          // for points with long dist from prev use M instead of L
+          for (i = 1; i < coords.length; i++) {
+            c = coords[i];
+            newpath.push((c[2] > 5 * avgd ? "M" : "L") + points[i]);
+          }
+          return newpath.join("");
+        }
+
+        var gradientNameFun = function(d) { return "grd"+d.originp+d.destp; };
+        var gradientRefNameFun = function(d) { return "url(#"+gradientNameFun(d)+")"; };
+
+        var defs = svg.append("svg:defs");
+
+        // see http://apike.ca/prog_svg_patterns.html
+        defs.append("marker")
+          .attr("id", "arrowHead")
+          .attr("viewBox", "0 0 10 10")
+          .attr("refX", 10)
+          .attr("refY", 5)
+          .attr("orient", "auto")
+          //.attr("markerUnits", "strokeWidth")
+          .attr("markerUnits", "userSpaceOnUse")
+          .attr("markerWidth", 4*2)
+          .attr("markerHeight", 3*2)
+        .append("polyline")
+          .attr("points", "0,0 10,5 0,10 1,5")
+          .attr("fill", maxColor)
+          //.attr("opacity", 0.5)
+          ;
+
+
+        var gradient = defs.selectAll("linearGradient")
+          .data(links)
+          .enter()
+          .append("svg:linearGradient")
+            .attr("id", gradientNameFun)
+            .attr("gradientUnits", "userSpaceOnUse")
+            .attr("x1", function(d) { 
+              return d.originp[0]; })
+            .attr("y1", function(d) { return d.originp[1]; })
+            .attr("x2", function(d) { return d.destp[0]; })
+            .attr("y2", function(d) { return d.destp[1]; })
+            ;
+
+        gradient.append("svg:stop")
+            .attr("offset", "0%")
+            .attr("stop-color", minColor)
+            .attr("stop-opacity", 1.0);
+        //gradient.append("svg:stop")
+        //    .attr("offset", "80%")
+        //    .attr("stop-color", maxColor)
+        //    .attr("stop-opacity", 1.0);
+        gradient.append("svg:stop")
+            .attr("offset", "100%")
+            .attr("stop-color", maxColor)
+            .attr("stop-opacity", 1.0);
+
+        var arcNodes = arcs.selectAll("path")
+          .data(links)
+          .enter().append("path")
+          //.attr("visibility", function(d) { return d.magnitude > 500 ? "visible" : "hidden"})
+          .attr("stroke", gradientRefNameFun)
+          //.attr("stroke", "red")
+          //.attr("opacity", function(d) { return arcOpacity(d.magnitude); })
+          .attr("opacity", function(d) { return arcOpacity(d.nretweets); })
+          //.attr("stroke", function(d) { return arcColor(d.magnitude); })
+          .attr("stroke-linecap", "round")
+          .attr("stroke-width", function(d) { return 1.5; })
+          .attr("d", function(d) { 
+            if (useGreatCircles)
+              return splitPath(path(arc(d)));
+            else 
+              return path({
+                type: "LineString",
+                coordinates: [d.source, d.target]
+              });
+          });
+        arcNodes.on("mouseover", function(d) { 
+          d3.select(this)
+            .attr("opacity", 1)
+            //.attr("marker-end", "url(#arrowHead)");
+        });
+        arcNodes.on("mouseout", function(d) {
+            d3.select(this)
+              .attr("opacity", function(d) { return arcOpacity(d.nretweets); })
+        });
+
+
+        arcNodes.append("svg:title")
+          .text(function(d) {
+            return "Retweets: " + d.nretweets;
+        })
+        ;
+        /*
+        setTimeout(function() {
+          arcs.selectAll("path").attr("marker-end", "url(#arrowHead)");
+        }, 0);
+        */
+
+      });
+
+        function click(d) {
+          var g = countries;
+          console.log("Ciao");
+          var x = 0,
+              y = 0,
+              k = 1;
+
+          if (d && centered !== d) {
+            var centroid = path.centroid(d);
+            x = -centroid[0];
+            y = -centroid[1];
+            k = 4;
+            centered = d;
+          } else {
+            centered = null;
+          }
+
+          g.selectAll("path")
+              .classed("active", centered && function(d) { return d === centered; });
+
+          g.transition()
+              .duration(1000)
+              .attr("transform", "scale(" + k + ")translate(" + x + "," + y + ")")
+              .style("stroke-width", 1.5 / k + "px");
+        }
+
+    </script>
+  </body>
+</html>

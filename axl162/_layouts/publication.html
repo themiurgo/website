@@ -1,0 +1,105 @@
+---
+layout: base
+---
+<!--
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title> {% if page.title %} {{ page.title }} | {% endif %} Antonio Lima </title>
+  <link rel="stylesheet" href="/css/styles.css" />
+</head>
+<body>
+  <div id="main">
+    <header>
+      <h1> Antonio Lima </h1>
+    <header>
+    <nav role="navigation">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/portfolio/">Portfolio</a></li>
+        <li><a href="/about">About</a></li>
+        <li><a href="/contact">Contact</a></li>
+      </ul>
+    </nav>
+    -->
+    <ul class="breadcrumb">
+      <li><a href="{{ site.url }}/index.html">Home</a> <span class="divider">/</span></li>
+      <li><a href="{{ site.url }}/publications.html">Publications</a> <span class="divider">/</span></li>
+      <li class="active">{{ page.title }}</li>
+    </ul>
+    {% if page.bibtex %}
+    <!-- Modal -->
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myModalLabel">Bibtex</h3>
+      </div>
+      <div class="modal-body">
+        <pre>
+        <p id="bibtex">{{ page.bibtex }}</p>
+        </pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+        <a id="copy-bibtex" class="btn btn-primary"><i class="fa fa-copy"></i> Copy to clipboard</a>
+        <script>
+        $(document).ready(function() {
+          $('a#copy-bibtex').zclip({
+              path:'{{ site.url }}/js/ZeroClipboard.swf',
+              copy:$('p#bibtex').text()
+          });
+        });
+        </script>
+      </div>
+    </div>
+      {% endif %}
+
+    <div class="row-fluid">
+      <h2>{{ page.title }}</h2>
+      <p style="font-size: 1.5em; color: #999999">
+            {% for authorid in page.authors %}
+            {% if site.authors[authorid] %}
+            <a href="{{ site.authors[authorid]['site'] }}">{{ site.authors[authorid]['name'] }} {{ site.authors[authorid]['surname'] }}</a>{% unless forloop.last %}, {% endunless %}
+            {% endif %}
+            {% endfor %}
+      </p>
+      <p style="font-size: 1.2em; color: #999999;">{{ page.pubinfo }}</p>
+      {% if page.award %}<div class="alert" style="margin-top: 1.5em"><i class="fa fa-trophy"></i><strong>&nbsp;&nbsp;Awarded {{ page.award }}</strong></div>{% endif %}
+      {% if page.featured %}<div class="alert"><i class="fa fa-star"></i><strong>&nbsp;&nbsp;Featured by {{ page.featured | join: ', ' }}</strong></div>{% endif %}
+      {% if content != empty %}
+      <blockquote>
+      {{ content }}
+      </blockquote>
+      {% endif %}
+      <div style="margin-top: 2em">
+        {% if page.paper %}
+          {% if page.paper contains "http://" %}
+            <a href="{{ page.paper }}" role="button" target="_blank" onclick="_gaq.push(['_trackEvent', 'Download', 'PDF', this.href]);" class="btn btn-large btn-primary"><i class="fa fa-file-pdf-o fa-lg"></i>&nbsp;&nbsp;Paper</a>
+          {% else %}
+            <a href="{{ site.url }}{{ page.paper }}" role="button" target="_blank" onclick="_gaq.push(['_trackEvent', 'Download', 'PDF', this.href]);" class="btn btn-large btn-primary"><i class="fa fa-file-pdf-o fa-lg"></i>&nbsp;&nbsp;Paper</a>
+          {% endif %}
+        {% endif %}
+      {% if page.preprint %}<a href="{{ page.preprint}}" role="button" class="btn btn-large btn-primary"><i class="fa fa-download fa-lg"></i>&nbsp;&nbsp;Preprint</a>{% endif %}
+      {% if page.slides %}<a href="{{ site.url }}{{ page.slides }}"><button class="btn btn-primary btn-large"><i class="fa fa-bar-chart-o fa-lg"></i>&nbsp;&nbsp;Slides</button></a>{% endif %}
+      {% if page.bibtex %}<a href="#myModal" role="button" class="btn btn-large" data-toggle="modal"><i class="fa fa-quote-left"></i>&nbsp;&nbsp;Bibtex</a>{% endif %}
+      {% if page.project %}<a href="{{ page.project }}" class="btn btn-large"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Project</a>{% endif %}
+      {% if page.image %}<div><img src="{{ site.url }}/img/{{ page.image }}" style="margin-top: 2em" /></div>{% endif %}
+      </div>
+    </div>
+    <div id="row-fluid">
+      <div id="disqus_thread" style="margin-top: 2em;"></div>
+      <script type="text/javascript">
+          /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+          var disqus_shortname = 'antoniolima'; // required: replace example with your forum shortname
+
+          /* * * DON'T EDIT BELOW THIS LINE * * */
+          (function() {
+              var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+              dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+              (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+          })();
+      </script>
+      <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+      <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    </div>

@@ -1,0 +1,12 @@
+ul.extraspace li {
+  margin: 0.5em;
+  padding: 0.2em;
+}
+
+ul.commasep li:after {
+      content: ','
+}
+
+ul.commasep li:last-child:after {
+  content:''
+}
