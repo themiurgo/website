@@ -9,7 +9,8 @@ layout: base
       <div class="row-fluid">
         <h2>Publications</h2>
         <ul class="fa-ul extraspace">
-          {% for post in site.categories.publications %}
+          {% assign publications = site.categories.publications | where: "hidden", false %}
+          {% for post in publications %}
           <li><i class="fa-li fa fa-caret-right"></i><b><a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a></b>
           {% if post.paper or post.preprint %}<i class="fa fa-file-pdf-o"></i>{% endif %}
           {% if post.slides %}<i class="fa fa-bar-chart-o"></i>{% endif %}

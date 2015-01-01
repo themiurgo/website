@@ -88,7 +88,8 @@ layout: base
         <div class="span6">
           <h2><i class="fa fa-flask"></i> Recent publications</h2>
           <ul class="extraspace fa-ul">
-            {% for post in site.categories.publications limit:4 %}
+            {% assign publications = site.categories.publications | where: "hidden", false %}
+            {% for post in publications limit:4 %}
             <li><i class="fa fa-li fa-caret-right"></i><b><a href="{{ site.url}}{{ post.url }}">{{ post.title }}</a></b><br/></li>{% endfor %}
           </ul>
           <p class="pagination-centered"><a class="btn" href="{{ site.url }}/publications.html">Full list&nbsp;&nbsp;<i class="fa fa-double-angle-right"></i></a></p>
