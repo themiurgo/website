@@ -1,0 +1,87 @@
+safe:        false
+url: http://localhost:4000
+baseurl: /jekyll_site
+url: http://www.cs.bham.ac.uk/~axl162
+
+source:      .
+destination: ./_site
+plugins:     ./_plugins
+
+future:      true
+lsi:         false
+highliter:   pygments
+markdown:    kramdown
+permalink:   none
+
+maruku:
+  use_tex:    false
+  use_divs:   false
+  png_engine: blahtex
+  png_dir:    images/latex
+  png_url:    /images/latex
+
+rdiscount:
+  extensions: []
+
+redcarpet:
+  extensions: []
+
+kramdown:
+  auto_ids: true,
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: false
+
+  coderay:
+    coderay_wrap: div
+    coderay_line_numbers: inline
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: style
+
+authors:
+  alima:
+    name: 'Antonio'
+    surname: 'Lima'
+    site: 'http://cs.bham.ac.uk/~axl162'
+  lrossi:
+    name: 'Luca'
+    surname: 'Rossi'
+    site: 'http://cs.bham.ac.uk/~rossil'
+  mmusolesi:
+    name: 'Mirco'
+    surname: 'Musolesi'
+    site: 'http://cs.bham.ac.uk/~musolesm'
+  vpejovic:
+    name: 'Veljko'
+    surname: 'Pejovic'
+    site: "http://cs.bham.ac.uk/~pejovicv"
+  mdedomenico:
+    name: 'Manlio'
+    surname: 'De Domenico'
+    site: 'http://deim.urv.cat/~manlio.dedomenico/'
+  vcarchiolo:
+    name: 'Vincenza'
+    surname: 'Carchiolo'
+    site: 'http://www.diit.unict.it/users/carchiol/'
+  gmangioni:
+    name: 'Giuseppe'
+    surname: 'Mangioni'
+    site: 'www.diit.unict.it/users/gmangioni'
+  pmougel:
+    name: 'Paul'
+    surname: 'Mougel'
+    site: 'http://pmol.fr'
+  mgonzalez:
+    name: 'Marta'
+    surname: 'Gonzalez'
+    site: 'http://humnetlab.mit.edu'
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      "hidden": false
