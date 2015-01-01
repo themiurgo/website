@@ -4,10 +4,9 @@ layout: publication
 title: "From Cells to Streets: Estimating Mobile Paths with Cellular-Side Data"
 authors: ["Ilias Leontiadis", alima, "Haewoon Kwak", "Rade Stanojevic",
 "David Wetherall", "Konstantina Papagiannaki"]
-pubinfo: In Proceedings of the 10th International Conference on emerging Networking EXperiments and Technologies (CoNEXT 2014). To appear.
+pubinfo: In Proceedings of the 10th International Conference on emerging Networking EXperiments and Technologies (CoNEXT 2014).
 pubinfoshort: CoNEXT 2014.
-#paper: http://www.nature.com/srep/2013/131018/srep02980/full/srep02980.html
-#project: http://cs.bham.ac.uk/research/projects/nsl/higgs/
+paper: http://conferences2.sigcomm.org/co-next/2014/CoNEXT_papers/p121.pdf
 ---
 Through their normal operation, cellular networks are a repository of
 continuous location information from its subscribed devices. Such
