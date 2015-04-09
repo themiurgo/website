@@ -84,6 +84,7 @@ layout: base
       {% if page.bibtex %}<a href="#myModal" role="button" class="btn btn-large" data-toggle="modal"><i class="fa fa-quote-left"></i>&nbsp;&nbsp;Bibtex</a>{% endif %}
       {% if page.project %}<a href="{{ page.project }}" class="btn btn-large"><i class="fa fa-cogs"></i>&nbsp;&nbsp;Project</a>{% endif %}
       {% if page.image %}<div><img src="{{ site.url }}/img/{{ page.image }}" style="margin-top: 2em" /></div>{% endif %}
+      {% if page.github %}<a href="{{ page.github}}" role="button" class="btn btn-large btn-primary"><i class="fa fa-github fa-lg"></i>&nbsp;&nbsp;Code</a>{% endif %}
       </div>
     </div>
     <div id="row-fluid">
