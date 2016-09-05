@@ -15,7 +15,7 @@ layout: base
           {% if post.paper or post.preprint %}<i class="fa fa-file-pdf-o"></i>{% endif %}
           {% if post.slides %}<i class="fa fa-bar-chart-o"></i>{% endif %}
           <br/>
-          <i>{{ post.pubinfoshort }}</i>
+          <i>{{ post.pubinfoshort }}.</i>
             {% for authorid in post.authors %}
             {% if site.authors[authorid] %}
             <a href="{{ site.authors[authorid]['site'] }}">{{ site.authors[authorid]['surname'] }}</a>{% else %}{{ authorid | split: " " | last }}{% endif %}{% unless forloop.last %}, {% endunless %}
@@ -25,7 +25,7 @@ layout: base
             <span class="label label-warning"><i class="fa fa-trophy"></i>&nbsp;&nbsp;Awarded</span>
             {% endif %}
             {% if post.featured %}
-            <span class="label label-warning"><i class="fa fa-star"></i>&nbsp;&nbsp;Featured by the press</span>
+            <span class="label label-warning"><i class="fa fa-star"></i>&nbsp;&nbsp;Featured in the press</span>
             {% endif %}
           </li>{% endfor %}
         </ul>

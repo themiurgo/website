@@ -1,5 +1,5 @@
 safe:        false
-url: http://localhost:4000
+url: http://127.0.0.1:4000
 baseurl: /jekyll_site
 url: http://www.cs.bham.ac.uk/~axl162
 
@@ -76,8 +76,12 @@ authors:
     site: 'http://pmol.fr'
   mgonzalez:
     name: 'Marta'
-    surname: 'Gonzalez'
+    surname: 'González'
     site: 'http://humnetlab.mit.edu'
+  scolak:
+    name: 'Serdar'
+    surname: 'Çolak'
+    site: 'https://scholar.google.com/citations?user=6wfuc1UAAAAJ&hl=en'
 
 defaults:
   -

@@ -4,7 +4,7 @@ layout: publication
 title: Interdependence and Predictability of Human Mobility and Social Interactions
 authors: [mdedomenico, alima, mmusolesi]
 pubinfo: Extended version accepted for Publication in Pervasive and Mobile Computing.<br />Original version in Proceedings of the Nokia Mobile Data Challenge Workshop. Colocated with Pervasive 2012. Newcastle, United Kingdom. June 2012.
-pubinfoshort: Pervasive and Mobile Computing.
+pubinfoshort: Pervasive and Mobile Computing
 award: <a href="http://research.nokia.com/page/12362">First prize</a> at the <a href="http://research.nokia.com/page/12000">Nokia Mobile Data Challenge</a> (open track).
 featured: [
 '<a href="http://www.technologyreview.com/news/428441/a-phone-that-knows-where-youre-going/">MIT Technology Review</a>',

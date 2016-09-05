@@ -4,7 +4,7 @@ layout: publication
 title: The Anatomy of a Scientific Rumor
 authors: [mdedomenico, alima, pmougel, mmusolesi]
 pubinfo: Submitted for publication. Preprint available on <a href="http://arxiv.org/abs/1301.2952">arXiv</a>.
-pubinfoshort: Sci. Rep. 3, 2980 (2013).
+pubinfoshort: Sci. Rep. 3, 2980 (2013)
 featured: [
 '<a href="http://www.newscientist.com/article/mg21729013.300-twitter-reveals-how-higgs-gossip-reached-fever-pitch.html">New Scientist</a>',
 '<a href="http://www.newscientist.com/blogs/shortsharpscience/2013/01/twitter-higgs-gossip.html">New Scientist Blog</a>',

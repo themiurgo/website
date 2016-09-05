@@ -4,7 +4,7 @@ layout: publication
 title: "Progmosis: Evaluating Risky Individual Behavior During Epidemics Using Mobile Network Data"
 authors: [alima, lrossi, vpejovic, mmusolesi, mgonzalez]
 pubinfo: Submitted to the D4D Senegal (2014).
-pubinfoshort: Submitted to the D4D Senegal (2014).
+pubinfoshort: D4D Senegal
 # paper: /downloads/progmosis-2014-lima.pdf
 # github: https://github.com/themiurgo/progmosis-risk
 paper: http://arxiv.org/abs/1504.01316

@@ -65,7 +65,7 @@ layout: base
       </p>
       <p style="font-size: 1.2em; color: #999999;">{{ page.pubinfo }}</p>
       {% if page.award %}<div class="alert" style="margin-top: 1.5em"><i class="fa fa-trophy"></i><strong>&nbsp;&nbsp;Awarded {{ page.award }}</strong></div>{% endif %}
-      {% if page.featured %}<div class="alert"><i class="fa fa-star"></i><strong>&nbsp;&nbsp;Featured by {{ page.featured | join: ', ' }}</strong></div>{% endif %}
+      {% if page.featured %}<div class="alert"><i class="fa fa-star"></i><strong>&nbsp;&nbsp;Featured in {{ page.featured | join: ', ' }}</strong></div>{% endif %}
       {% if content != empty %}
       <blockquote>
       {{ content }}
