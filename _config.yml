@@ -1,7 +1,7 @@
 safe:        false
 url: http://127.0.0.1:4000
 baseurl: /jekyll_site
-url: http://themiurgo.github.io/website
+url: //themiurgo.github.io/website
 
 source:      .
 destination: ./_site
