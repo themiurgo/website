@@ -71,7 +71,7 @@ layout: base
         <div class="span6">
           <h2><i class="fa fa-newspaper-o"></i> News</h2>
           <ul class="fa-ul extraspace">
-            {% for post in site.categories.news limit:3 %}
+            {% for post in site.categories.news limit:site.home.news_limit %}
             <li><i class="fa-li fa fa-caret-right"></i><b>{{ post.date | date: "%b %d, %Y" }}</b> - {{ post.title }}<br/></li>{% endfor %}
           </ul>
         </div>
