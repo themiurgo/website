@@ -7,11 +7,6 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-
-    <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
-    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-    <link href='//fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{{ site.url }}/css/style.css">
     <style>
       html {
         overflow: -moz-scrollbars-vertical;
@@ -22,7 +17,6 @@
         padding-top: 60px; /* 60px to make the container go all the way to the bottom of the topbar */
       }
     </style>
-    <link href="{{ site.url }}/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -66,6 +60,26 @@
   </head>
 
   <body>
+    <noscript id="deferred-styles">
+		<link href='//fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{ site.url }}/css/style.css">
+		<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+		<link href="{{ site.url }}/css/bootstrap-responsive.css" rel="stylesheet">
+    </noscript>
+	<script>
+		  var loadDeferredStyles = function() {
+			var addStylesNode = document.getElementById("deferred-styles");
+			var replacement = document.createElement("div");
+			replacement.innerHTML = addStylesNode.textContent;
+			document.body.appendChild(replacement)
+			addStylesNode.parentElement.removeChild(addStylesNode);
+		  };
+		  var raf = requestAnimationFrame || mozRequestAnimationFrame ||
+			  webkitRequestAnimationFrame || msRequestAnimationFrame;
+		  if (raf) raf(function() { window.setTimeout(loadDeferredStyles, 0); });
+		  else window.addEventListener('load', loadDeferredStyles);
+    </script>
 
     <div class="navbar navbar-fixed-top navbar-inverse">
       <div class="navbar-inner">
