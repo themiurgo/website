@@ -6,8 +6,7 @@ layout: base
           <div class="span8 hidden-phone">
             <h1>Antonio Lima</h1>
             <ul class="fa-ul">
-              <li><i class="fa-li fa fa-user fa-lg fa-fw"></i>Data Science Research Fellow</li> at Nesta.
-              <li><i class="fa-li fa fa-university fa-lg fa-fw"></i>University of Birmingham, University College London</li>
+			  <li><i class="fa-li fa fa-user fa-lg fa-fw"></i>Senior Data Scientist at Vodafone UK</li>
               <li><i class="fa-li fa fa-globe fa-lg fa-fw"></i>London, UK</li>
             </ul>
             <!--
@@ -24,7 +23,8 @@ layout: base
               data-show-count="true">Follow @themiurgo</a>
             <script>!function(d,s,id){var
               js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-			{% include card.md %}
+			{% capture cardinclude %}{% include card.md %}{% endcapture %}
+			{{ cardinclude | markdownify }}
           </div>
           <div class="span4">
             <div class="thumbnails">
@@ -39,9 +39,8 @@ layout: base
           <div class="span8">
             <h1>Antonio Lima</h1>
             <ul class="fa-ul">
-              <li><i class="fa-li fa fa-user fa-lg"></i>Data Science Research Fewllo at Nesta</li>
-              <li><i class="fa-li fa fa-university"></i>University of Birmingham</li>
-              <li><i class="fa-li fa fa-globe"></i>Birmingham, UK</li>
+              <li><i class="fa-li fa fa-user fa-lg"></i>Senior Data Scientist at Vodafone UK</li>
+              <li><i class="fa-li fa fa-globe"></i>London, UK</li>
             </ul>
             <!--
             <div class="btn-toolbar">
