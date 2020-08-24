@@ -80,11 +80,24 @@ authors:
   mgonzalez:
     name: 'Marta'
     surname: 'González'
-    site: 'http://humnetlab.mit.edu'
+    site: 'http://humnetlab.berkeley.edu/'
   scolak:
     name: 'Serdar'
     surname: 'Çolak'
     site: 'https://scholar.google.com/citations?user=6wfuc1UAAAAJ&hl=en'
+  mdenadai:
+    name: 'Marco'
+    surname: 'De Nadai'
+    site: 'https://www.marcodena.it/'
+  blepri:
+    name: 'Bruno'
+    surname: 'Lepri'
+    site: 'https://scholar.google.com/citations?user=zN5RTZcAAAAJ&hl=en'
+  noliver:
+    name: 'Nuria'
+    surname: 'Oliver'
+    site: 'http://www.nuriaoliver.com/'
+
 
 defaults:
   -
