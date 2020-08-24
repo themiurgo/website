@@ -41,30 +41,30 @@ kramdown:
     coderay_css: style
 
 home:
-  news_limit: 6
+  news_limit: 5
   publications_limit: 4
 
 authors:
   alima:
     name: 'Antonio'
     surname: 'Lima'
-    site: 'http://themiurgo.github.io/~axl162'
+    site: 'http://themiurgo.github.io/website'
   lrossi:
     name: 'Luca'
     surname: 'Rossi'
-    site: 'http://cs.bham.ac.uk/~rossil'
+    site: 'https://blextar.github.io/luca-rossi/'
   mmusolesi:
     name: 'Mirco'
     surname: 'Musolesi'
-    site: 'http://cs.bham.ac.uk/~musolesm'
+    site: 'https://www.mircomusolesi.org/'
   vpejovic:
     name: 'Veljko'
     surname: 'Pejovic'
-    site: "http://cs.bham.ac.uk/~pejovicv"
+    site: "http://lrss.fri.uni-lj.si/Veljko/"
   mdedomenico:
     name: 'Manlio'
     surname: 'De Domenico'
-    site: 'http://deim.urv.cat/~manlio.dedomenico/'
+    site: 'https://comunelab.fbk.eu/manlio/index.php'
   vcarchiolo:
     name: 'Vincenza'
     surname: 'Carchiolo'
@@ -76,7 +76,7 @@ authors:
   pmougel:
     name: 'Paul'
     surname: 'Mougel'
-    site: 'http://pmol.fr'
+    site: 'https://twitter.com/paul_mougel?lang=en'
   mgonzalez:
     name: 'Marta'
     surname: 'González'
@@ -89,6 +89,10 @@ authors:
     name: 'Marco'
     surname: 'De Nadai'
     site: 'https://www.marcodena.it/'
+  acardoso:
+    name: 'Ângelo'
+    surname: 'Cardoso'
+    site: 'https://scholar.google.com/citations?user=Jk2qAioAAAAJ&hl=en'
   blepri:
     name: 'Bruno'
     surname: 'Lepri'
