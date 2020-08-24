@@ -71,7 +71,7 @@ layout: base
           <h2><i class="fa fa-newspaper-o"></i> News</h2>
           <ul class="fa-ul extraspace">
             {% for post in site.categories.news limit:site.home.news_limit %}
-            <li><i class="fa-li fa fa-caret-right"></i><b>{{ post.date | date: "%b %d, %Y" }}</b> - {{ post.title | markdownify }}<br/></li>{% endfor %}
+            <li><i class="fa-li fa fa-caret-right"></i><b>{{ post.date | date: "%b %d, %Y" }}</b> - {{ post.title | markdownify | remove: '<p>' | remove: '</p>' }}<br/></li>{% endfor %}
           </ul>
         </div>
         <div class="span6">
